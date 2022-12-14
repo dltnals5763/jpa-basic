@@ -41,7 +41,14 @@ public class Member {
         return team;
     }
 
+    // 연관관계 편의 메서드 구현은 둘 중 한 곳에서만 하는 게 좋음
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
     public void setTeam(Team team) {
         this.team = team;
     }
+
 }
