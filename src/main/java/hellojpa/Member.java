@@ -1,9 +1,8 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -14,12 +13,32 @@ public class Member {
     @Column(name = "username")
     private String username;
 
-//    @Column(name = "team_id")
-//    private Long teamId;
-
     @ManyToOne
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "team_id", insertable = false, updatable = false)
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "locker_id")
+    private Locker locker;
+
+    @OneToMany
+    private List<MemberProduct> products = new ArrayList<>();
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
 
     public Long getId() {
         return id;
@@ -37,18 +56,5 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    // 연관관계 편의 메서드 구현은 둘 중 한 곳에서만 하는 게 좋음
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 
 }

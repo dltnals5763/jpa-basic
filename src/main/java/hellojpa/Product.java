@@ -5,27 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+public class Product {
 
     @Id @GeneratedValue
-    @Column(name = "team_id")
+    @Column(name = "product_id")
     private Long id;
+
     private String name;
 
-    @OneToMany
-//    @JoinColumn("team_id")
-    private List<Member> members = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
-    }
-
-    public List<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Member> members) {
-        this.members = members;
     }
 
     public void setId(Long id) {
@@ -39,6 +31,4 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }
