@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,14 +18,14 @@ public class JpaMain {
         try {
 
             Member member = new Member();
-            member.setUsername("member1");
+            member.setCreatedBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("user1");
+
             em.persist(member);
 
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-
-            em.persist(team);
+            em.flush();
+            em.clear();
 
             ts.commit();
         } catch (Exception e) {
