@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,17 +16,9 @@ public class Member extends BaseEntity{
     @Column(name = "username")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Team team;
-
-    @OneToOne
-    @JoinColumn(name = "locker_id")
-    private Locker locker;
-
-    @OneToMany
-    private List<MemberProduct> products = new ArrayList<>();
-
 
 
     public Team getTeam() {
@@ -35,13 +29,6 @@ public class Member extends BaseEntity{
         this.team = team;
     }
 
-    public Locker getLocker() {
-        return locker;
-    }
-
-    public void setLocker(Locker locker) {
-        this.locker = locker;
-    }
 
     public Long getId() {
         return id;
