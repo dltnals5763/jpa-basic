@@ -12,21 +12,21 @@ public class Team extends BaseEntity{
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
-//    @JoinColumn("team_id")
-    private List<Member> members = new ArrayList<>();
+//    @OneToMany(mappedBy = "team")
+////    @JoinColumn("team_id")
+//    private List<Member> members = new ArrayList<>();
 
     public Long getId() {
         return id;
     }
 
-    public List<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Member> members) {
-        this.members = members;
-    }
+//    public List<Member> getMembers() {
+//        return members;
+//    }
+//
+//    public void setMembers(List<Member> members) {
+//        this.members = members;
+//    }
 
     public void setId(Long id) {
         this.id = id;
